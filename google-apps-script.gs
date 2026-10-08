@@ -4,9 +4,13 @@
 // 3. Paste the deployment URL into config.js.
 
 const FOLDER_ID = "1dL33ttskWlMWJtnjnpomhFRbPZW-II_p";
+const SUBMISSIONS_CLOSE_AT = new Date("2026-10-17T00:00:00+05:30").getTime();
 
 function doPost(event) {
   try {
+    if (Date.now() >= SUBMISSIONS_CLOSE_AT) {
+      throw new Error("Birthday-card submissions are now closed.");
+    }
     const payload = JSON.parse(event.postData.contents);
     if (!payload.imageBase64 || !payload.fileName || !payload.senderName) {
       throw new Error("Missing required card information.");

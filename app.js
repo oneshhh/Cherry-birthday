@@ -1,7 +1,7 @@
 "use strict";
 
 const BIRTHDAY = new Date("2026-10-17T00:00:00+05:30");
-const SHEET_URL = "assets/kawaii-doodles.png";
+const SHEET_URL = "kawaii-doodles.png";
 const MAX_HISTORY = 60;
 
 // Coordinates are measured from the 1024 × 1536 doodle sheet supplied with the page.
@@ -56,6 +56,16 @@ document.addEventListener("DOMContentLoaded", init);
 function init() {
   Object.assign(elements, {
     card: document.getElementById("card-canvas"),
+    studioSection: document.getElementById("studio"),
+    headerLink: document.querySelector(".header-link"),
+    heroEyebrow: document.getElementById("hero-eyebrow"),
+    heroTitle: document.getElementById("hero-title"),
+    heroCopy: document.getElementById("hero-copy"),
+    countdown: document.getElementById("countdown"),
+    countdownNote: document.getElementById("countdown-note"),
+    heroCta: document.getElementById("hero-cta"),
+    birthdayCelebration: document.getElementById("birthday-celebration"),
+    birthdayFireworks: document.getElementById("birthday-fireworks"),
     layer: document.getElementById("sticker-layer"),
     palette: document.getElementById("sticker-palette"),
     stickerCount: document.getElementById("sticker-count"),
@@ -76,16 +86,23 @@ function init() {
     backwardButton: document.getElementById("backward-button"),
     forwardButton: document.getElementById("forward-button"),
     saveButton: document.getElementById("save-button"),
-    status: document.getElementById("status-message")
+    status: document.getElementById("status-message"),
+    studioGrid: document.getElementById("studio-grid"),
+    submissionSuccess: document.getElementById("submission-success"),
+    refreshButton: document.getElementById("refresh-button")
   });
 
-  renderPalettePlaceholders();
   bindControls();
+  initFactsMarquee();
   updateCardCopy();
+  const birthdayMode = activateBirthdayMode();
   updateCountdown();
   window.setInterval(updateCountdown, 1000);
-  loadStickerAssets();
-  renderStickers();
+  if (!birthdayMode) {
+    renderPalettePlaceholders();
+    loadStickerAssets();
+    renderStickers();
+  }
 }
 
 function bindControls() {
@@ -115,6 +132,7 @@ function bindControls() {
   elements.backwardButton.addEventListener("click", () => moveLayer(-1));
   elements.forwardButton.addEventListener("click", () => moveLayer(1));
   elements.saveButton.addEventListener("click", saveCard);
+  elements.refreshButton.addEventListener("click", () => window.location.reload());
 
   [elements.sizeSlider, elements.rotationSlider].forEach((slider) => {
     slider.addEventListener("focus", () => { sliderStart = snapshot(); });
@@ -149,7 +167,34 @@ function updateCountdown() {
   for (const [key, value] of Object.entries(values)) {
     document.getElementById(key).textContent = String(value).padStart(2, "0");
   }
-  if (remaining === 0) document.getElementById("countdown-note").textContent = "Cherry is officially 22 ♡";
+  if (remaining === 0) activateBirthdayMode();
+}
+
+function activateBirthdayMode() {
+  if (Date.now() < BIRTHDAY.getTime()) return false;
+  if (document.body.classList.contains("birthday-mode")) return true;
+  document.body.classList.add("birthday-mode");
+  document.title = "Happy Birthday, Cherry! 🎂";
+  elements.heroEyebrow.textContent = "October 17 is finally here ♡";
+  elements.heroTitle.textContent = "It’s Cherry’s birthday!";
+  elements.heroCopy.textContent = "Thank you to everyone who filled her birthday collection with sweet messages, tiny doodles, and so much love.";
+  elements.countdown.hidden = true;
+  elements.countdownNote.hidden = true;
+  elements.heroCta.hidden = true;
+  elements.birthdayCelebration.hidden = false;
+  elements.birthdayFireworks.hidden = false;
+  elements.studioSection.hidden = true;
+  elements.headerLink.hidden = true;
+  return true;
+}
+
+function initFactsMarquee() {
+  const marquee = document.querySelector(".facts-marquee");
+  const group = marquee?.querySelector(".facts-group");
+  if (!marquee || !group || marquee.children.length > 1) return;
+  const duplicate = group.cloneNode(true);
+  duplicate.setAttribute("aria-hidden", "true");
+  marquee.appendChild(duplicate);
 }
 
 function renderPalettePlaceholders() {
@@ -557,6 +602,10 @@ function applyTheme() {
 }
 
 async function saveCard() {
+  if (Date.now() >= BIRTHDAY.getTime()) {
+    activateBirthdayMode();
+    return;
+  }
   const wish = elements.wishInput.value.trim();
   const name = elements.signatureInput.value.trim();
   if (!wish) return showStatus("Please write a birthday wish first ♡", "error");
@@ -600,6 +649,7 @@ async function saveCard() {
         const result = await response.json().catch(() => ({ ok: response.ok }));
         if (!response.ok || result.ok === false) throw new Error(result.error || `Upload failed with ${response.status}`);
         showStatus("Your card is safely tucked into Cherry's birthday collection! ♡", "success");
+        showSubmittedState();
       } catch (uploadError) {
         console.error(uploadError);
         downloadDataUrl(dataUrl, fileName);
@@ -622,6 +672,13 @@ async function saveCard() {
 function showStatus(message, type) {
   elements.status.textContent = message;
   elements.status.className = `status-message show ${type}`;
+}
+
+function showSubmittedState() {
+  elements.studioGrid.hidden = true;
+  elements.submissionSuccess.hidden = false;
+  elements.submissionSuccess.focus({ preventScroll: true });
+  elements.submissionSuccess.scrollIntoView({ behavior: "smooth", block: "center" });
 }
 
 function downloadDataUrl(dataUrl, fileName) {

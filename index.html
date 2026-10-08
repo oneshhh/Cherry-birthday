@@ -5,7 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fff7d6">
   <meta name="description" content="Make a tiny, lovely birthday card for Cherry.">
-  <title>Cherry turns 22</title>
+  <title>Make a card for Cherry</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E🍒%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -28,17 +29,33 @@
       <span class="doodle doodle-one" aria-hidden="true">✿</span>
       <span class="doodle doodle-two" aria-hidden="true">♡</span>
       <span class="doodle doodle-three" aria-hidden="true">★</span>
-      <p class="eyebrow">A tiny birthday surprise for</p>
+      <span class="doodle doodle-four" aria-hidden="true">✦</span>
+      <span class="doodle doodle-five" aria-hidden="true">♥</span>
+      <span class="doodle doodle-six" aria-hidden="true">✿</span>
+      <p class="eyebrow" id="hero-eyebrow">A tiny birthday surprise for</p>
       <h1 id="hero-title">Cherry is turning 22!</h1>
-      <p class="hero-copy">Leave her a sweet note, cover it in tiny doodles, and add one more lovely page to her birthday.</p>
-      <div class="countdown" aria-label="Countdown to Cherry's birthday" aria-live="polite">
+      <p class="hero-copy" id="hero-copy">Leave her a sweet note, cover it in tiny doodles, and add one more lovely page to her birthday.</p>
+      <div class="countdown" id="countdown" aria-label="Countdown to Cherry's birthday" aria-live="polite">
         <div><strong id="days">00</strong><span>days</span></div>
         <div><strong id="hours">00</strong><span>hours</span></div>
         <div><strong id="minutes">00</strong><span>minutes</span></div>
         <div><strong id="seconds">00</strong><span>seconds</span></div>
       </div>
       <p class="countdown-note" id="countdown-note">Until October 17, 2026</p>
-      <a class="primary-link" href="#studio">Make Cherry a card <span aria-hidden="true">↓</span></a>
+      <a class="primary-link" id="hero-cta" href="#studio">Make Cherry a card <span aria-hidden="true">↓</span></a>
+      <div class="birthday-celebration" id="birthday-celebration" hidden>
+        <span class="birthday-cake" aria-hidden="true">🎂</span>
+        <strong>Thank you all for the wishes!</strong>
+        <p>It’s Cherry’s birthday, and her collection is full of lovely little messages from all of you ♡</p>
+      </div>
+      <div class="birthday-fireworks" id="birthday-fireworks" aria-hidden="true" hidden>
+        <span class="firework firework-one">✦</span>
+        <span class="firework firework-two">✷</span>
+        <span class="firework firework-three">✦</span>
+        <span class="firework firework-four">✺</span>
+        <span class="firework firework-five">✦</span>
+        <span class="firework firework-six">✷</span>
+      </div>
     </section>
 
     <section class="facts" aria-labelledby="facts-title">
@@ -47,13 +64,17 @@
         <h2 id="facts-title">Things that make her, her</h2>
       </div>
       <div class="facts-track">
-        <article class="fact-card pink"><span>🎂</span><h3>Turning 22</h3><p>Her double-twos era begins October 17.</p></article>
-        <article class="fact-card mint"><span>⚖️</span><h3>Libra energy</h3><p>Born October 17, 2004 at 3:00 AM.</p></article>
-        <article class="fact-card lilac"><span>📏</span><h3>5'0" tall</h3><p>Tiny, lovely, and impossible to miss.</p></article>
-        <article class="fact-card yellow"><span>☕</span><h3>Her coffee order</h3><p>A cozy hazelnut macchiato.</p></article>
-        <article class="fact-card cream"><span>🌸</span><h3>Favourite flowers</h3><p>Lilies, always.</p></article>
-        <article class="fact-card blue"><span>📺</span><h3>Comfort-show queen</h3><p>Gilmore Girls, Gossip Girl, Grey's Anatomy, Friends, and Modern Family.</p></article>
-        <article class="fact-card pink"><span>🐾</span><h3>Her dog</h3><p>Her dog's name is Cherry too.</p></article>
+        <div class="facts-marquee">
+          <div class="facts-group">
+            <article class="fact-card pink"><span>🎂</span><h3>Turning 22</h3><p>Her double-twos era begins October 17.</p></article>
+            <article class="fact-card mint"><span>⚖️</span><h3>Libra energy</h3><p>Born October 17, 2004 at 3:00 AM.</p></article>
+            <article class="fact-card lilac"><span>📏</span><h3>5'0" tall</h3><p>Tiny, lovely, and impossible to miss.</p></article>
+            <article class="fact-card yellow"><span>☕</span><h3>Her coffee order</h3><p>A cozy hazelnut macchiato.</p></article>
+            <article class="fact-card cream"><span>🌸</span><h3>Favourite flowers</h3><p>Lilies, always.</p></article>
+            <article class="fact-card blue"><span>📺</span><h3>Comfort-show queen</h3><p>Gilmore Girls, Gossip Girl, Grey's Anatomy, Friends, and Modern Family.</p></article>
+            <article class="fact-card pink"><span>🐾</span><h3>Her dog</h3><p>Her dog's name is Cherry too.</p></article>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -64,7 +85,7 @@
         <p>Write your wish, pick a doodle, then drag it anywhere. Tap a placed sticker to resize, rotate, duplicate, or layer it.</p>
       </div>
 
-      <div class="studio-grid">
+      <div class="studio-grid" id="studio-grid">
         <div class="canvas-column">
           <div class="canvas-frame">
             <div class="birthday-card theme-blush" id="card-canvas" tabindex="0" aria-label="Birthday card canvas. Select and drag stickers to arrange them.">
@@ -137,6 +158,13 @@
           <p class="privacy-note">Your finished card is saved as a private image for Cherry.</p>
           <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
         </aside>
+      </div>
+      <div class="submission-success" id="submission-success" tabindex="-1" hidden>
+        <span class="success-envelope" aria-hidden="true">💌</span>
+        <p class="eyebrow">Your little piece of birthday magic is on its way</p>
+        <h3>Wish tucked away for Cherry!</h3>
+        <p>Your finished card is safely inside her private birthday collection. Thank you for making her day sweeter ♡</p>
+        <button type="button" id="refresh-button">Refresh to make another card</button>
       </div>
     </section>
   </main>
