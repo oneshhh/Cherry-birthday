@@ -200,7 +200,26 @@ body.birthday-mode .hero-copy { max-width: 720px; font-size: clamp(1.08rem, 2.2v
 .birthday-card.theme-mint { background: #c7f0d8; --card-ink: #285843; }
 .birthday-card.theme-cream { background: #fff8df; --card-ink: #5b4440; }
 .paper-noise { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .32; background-image: radial-gradient(rgba(80,50,45,.12) .65px, transparent .65px); background-size: 7px 7px; }
-.washi { position: absolute; z-index: 3; top: -3px; left: 50%; width: 31%; height: 5.5%; transform: translateX(-50%) rotate(-1.5deg); background: rgba(255,255,255,.62); box-shadow: 0 2px 8px rgba(60,45,40,.08); clip-path: polygon(2% 8%, 100% 0, 97% 90%, 0 100%); pointer-events: none; }
+.washi {
+  position: absolute;
+  z-index: 3;
+  top: -10px;
+  left: 50%;
+  width: 34%;
+  height: 7%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  background:
+    repeating-linear-gradient(135deg, rgba(255,255,255,.38) 0 7px, rgba(255,228,220,.22) 7px 14px),
+    #fff1dd;
+  box-shadow: 0 3px 8px rgba(60,45,40,.12);
+  clip-path: polygon(
+    4% 0, 96% 0,
+    100% 12%, 96% 24%, 100% 36%, 96% 48%, 100% 60%, 96% 72%, 100% 84%, 96% 100%,
+    4% 100%,
+    0 88%, 4% 76%, 0 64%, 4% 52%, 0 40%, 4% 28%, 0 16%
+  );
+  pointer-events: none;
+}
 .card-copy { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
 .card-topline { position: absolute; top: 7%; left: 7%; right: 7%; display: flex; justify-content: space-between; gap: 12px; font: 700 clamp(.8rem, 2vw, 1.15rem)/1.2 "Caveat", cursive; }
 .card-wish { position: absolute; top: 48%; left: 10%; right: 10%; margin: 0; transform: translateY(-50%); text-align: center; font: 600 clamp(1.15rem, 3.25vw, 2rem)/1.32 "Fredoka", sans-serif; text-wrap: balance; overflow-wrap: anywhere; }
@@ -217,6 +236,7 @@ body.birthday-mode .hero-copy { max-width: 720px; font-size: clamp(1.08rem, 2.2v
 .rotate-handle { top: -39px; left: 50%; transform: translateX(-50%); cursor: grab; }
 .rotate-handle::after { content: "↻"; color: white; font-size: 14px; font-weight: 900; }
 .birthday-card.exporting .placed-sticker.selected::after, .birthday-card.exporting .sticker-handle { display: none !important; }
+.birthday-card.exporting .washi { display: none !important; }
 
 .canvas-toolbar { display: flex; flex-wrap: wrap; justify-content: center; gap: 9px; max-width: 640px; margin: 18px auto 0; }
 .tool-button { min-height: 42px; padding: 8px 13px; border: 2px solid var(--line); border-radius: 999px; background: white; font-weight: 800; box-shadow: 3px 3px 0 var(--line); cursor: pointer; }
