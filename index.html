@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff7d6">
+  <meta name="description" content="Make a tiny, lovely birthday card for Cherry.">
+  <title>Cherry turns 22</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;600;700&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js" defer></script>
+  <script src="config.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Cherry's birthday home">
+      <span aria-hidden="true">♥</span>
+      <span>for Cherry</span>
+    </a>
+    <a class="header-link" href="#studio">Make a card</a>
+  </header>
+
+  <main id="top">
+    <section class="hero" aria-labelledby="hero-title">
+      <span class="doodle doodle-one" aria-hidden="true">✿</span>
+      <span class="doodle doodle-two" aria-hidden="true">♡</span>
+      <span class="doodle doodle-three" aria-hidden="true">★</span>
+      <p class="eyebrow">A tiny birthday surprise for</p>
+      <h1 id="hero-title">Cherry is turning 22!</h1>
+      <p class="hero-copy">Leave her a sweet note, cover it in tiny doodles, and add one more lovely page to her birthday.</p>
+      <div class="countdown" aria-label="Countdown to Cherry's birthday" aria-live="polite">
+        <div><strong id="days">00</strong><span>days</span></div>
+        <div><strong id="hours">00</strong><span>hours</span></div>
+        <div><strong id="minutes">00</strong><span>minutes</span></div>
+        <div><strong id="seconds">00</strong><span>seconds</span></div>
+      </div>
+      <p class="countdown-note" id="countdown-note">Until October 17, 2026</p>
+      <a class="primary-link" href="#studio">Make Cherry a card <span aria-hidden="true">↓</span></a>
+    </section>
+
+    <section class="facts" aria-labelledby="facts-title">
+      <div class="section-heading">
+        <p class="eyebrow">A pocketful of Cherry facts</p>
+        <h2 id="facts-title">Things that make her, her</h2>
+      </div>
+      <div class="facts-track">
+        <article class="fact-card pink"><span>🎂</span><h3>Turning 22</h3><p>Her double-twos era begins October 17.</p></article>
+        <article class="fact-card mint"><span>⚖️</span><h3>Libra energy</h3><p>Born October 17, 2004 at 3:00 AM.</p></article>
+        <article class="fact-card lilac"><span>📏</span><h3>5'0" tall</h3><p>Tiny, lovely, and impossible to miss.</p></article>
+        <article class="fact-card yellow"><span>☕</span><h3>Her coffee order</h3><p>A cozy hazelnut macchiato.</p></article>
+        <article class="fact-card cream"><span>🌸</span><h3>Favourite flowers</h3><p>Lilies, always.</p></article>
+        <article class="fact-card blue"><span>📺</span><h3>Comfort-show queen</h3><p>Gilmore Girls, Gossip Girl, Grey's Anatomy, Friends, and Modern Family.</p></article>
+        <article class="fact-card pink"><span>🐾</span><h3>Her dog</h3><p>Her dog's name is Cherry too.</p></article>
+      </div>
+    </section>
+
+    <section class="studio" id="studio" aria-labelledby="studio-title">
+      <div class="section-heading studio-heading">
+        <p class="eyebrow">The little wish studio</p>
+        <h2 id="studio-title">Create a card she can keep</h2>
+        <p>Write your wish, pick a doodle, then drag it anywhere. Tap a placed sticker to resize, rotate, duplicate, or layer it.</p>
+      </div>
+
+      <div class="studio-grid">
+        <div class="canvas-column">
+          <div class="canvas-frame">
+            <div class="birthday-card theme-blush" id="card-canvas" tabindex="0" aria-label="Birthday card canvas. Select and drag stickers to arrange them.">
+              <div class="paper-noise" aria-hidden="true"></div>
+              <div class="washi" aria-hidden="true"></div>
+              <div class="card-copy">
+                <div class="card-topline">
+                  <span>To: Cherry ♡</span>
+                  <span>Oct 17, 2026</span>
+                </div>
+                <p class="card-wish" id="preview-wish">Wishing you the sweetest, most magical 22nd birthday ever! Keep shining bright like the star you are.</p>
+                <p class="card-signature" id="preview-signature">— A friend</p>
+              </div>
+              <div id="sticker-layer" class="sticker-layer" aria-live="polite"></div>
+            </div>
+          </div>
+
+          <div class="canvas-toolbar" aria-label="Card editing tools">
+            <button class="tool-button" type="button" id="undo-button" title="Undo (Ctrl or Cmd + Z)">↶ <span>Undo</span></button>
+            <button class="tool-button" type="button" id="redo-button" title="Redo (Ctrl or Cmd + Shift + Z)">↷ <span>Redo</span></button>
+            <button class="tool-button" type="button" id="duplicate-button" disabled>⧉ <span>Duplicate</span></button>
+            <button class="tool-button danger" type="button" id="delete-button" disabled>× <span>Delete</span></button>
+            <button class="tool-button" type="button" id="clear-button">⌫ <span>Clear all</span></button>
+          </div>
+          <p class="canvas-tip">Tip: drag a sticker to move it. Use the pink corner handle to resize and the round handle above it to rotate.</p>
+        </div>
+
+        <aside class="control-panel" aria-label="Card customization controls">
+          <div class="control-section">
+            <div class="label-row"><label for="wish-input">Your birthday wish</label><span id="wish-count">105 / 280</span></div>
+            <textarea id="wish-input" maxlength="280" rows="5" placeholder="Write something lovely for Cherry…">Wishing you the sweetest, most magical 22nd birthday ever! Keep shining bright like the star you are.</textarea>
+          </div>
+
+          <div class="control-section">
+            <label for="signature-input">Your name</label>
+            <input id="signature-input" maxlength="40" type="text" placeholder="Your name">
+            <small>This appears in the bottom-right corner of the card.</small>
+          </div>
+
+          <fieldset class="control-section">
+            <legend>Card colour</legend>
+            <div class="swatches" id="theme-picker">
+              <button class="swatch active" type="button" data-theme="blush" style="--swatch:#ffc9d7" aria-label="Blush pink" aria-pressed="true"></button>
+              <button class="swatch" type="button" data-theme="lilac" style="--swatch:#dec9ff" aria-label="Lavender dream" aria-pressed="false"></button>
+              <button class="swatch" type="button" data-theme="butter" style="--swatch:#ffe98b" aria-label="Butter yellow" aria-pressed="false"></button>
+              <button class="swatch" type="button" data-theme="mint" style="--swatch:#c7f0d8" aria-label="Mint garden" aria-pressed="false"></button>
+              <button class="swatch" type="button" data-theme="cream" style="--swatch:#fff8df" aria-label="Cream scrapbook" aria-pressed="false"></button>
+            </div>
+          </fieldset>
+
+          <div class="control-section sticker-section">
+            <div class="label-row"><span class="field-label">Doodle stickers</span><span id="sticker-count">Loading…</span></div>
+            <p class="field-help">Tap to add as many as you like. Every doodle is an individual sticker.</p>
+            <div class="sticker-palette" id="sticker-palette" aria-label="Doodle sticker choices"></div>
+          </div>
+
+          <div class="control-section inspector" id="inspector" aria-disabled="true">
+            <div class="label-row"><span class="field-label">Selected sticker</span><span id="selection-name">None selected</span></div>
+            <label for="size-slider">Size</label>
+            <input id="size-slider" type="range" min="10" max="55" value="24" disabled>
+            <label for="rotation-slider">Rotation</label>
+            <input id="rotation-slider" type="range" min="-180" max="180" value="0" disabled>
+            <div class="layer-buttons">
+              <button type="button" id="backward-button" disabled>Send backward</button>
+              <button type="button" id="forward-button" disabled>Bring forward</button>
+            </div>
+          </div>
+
+          <button class="save-button" id="save-button" type="button">Save my wish for Cherry ♡</button>
+          <p class="privacy-note">Your finished card is saved as a private image for Cherry.</p>
+          <div class="status-message" id="status-message" role="status" aria-live="polite"></div>
+        </aside>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Made with an unreasonable amount of love ♡</p>
+  </footer>
+</body>
+</html>
