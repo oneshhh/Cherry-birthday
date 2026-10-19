@@ -1,6 +1,6 @@
 "use strict";
 
-const BIRTHDAY = new Date("2026-11-17T00:00:00+05:30");
+const BIRTHDAY = new Date("2026-10-20T00:56:00+05:30");
 const SHEET_URL = "kawaii-doodles.png";
 const MAX_HISTORY = 60;
 
